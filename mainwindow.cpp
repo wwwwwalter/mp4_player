@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalSlider_volumn->setValue(50);
     qMediaPlayer->setVolume(50);
 
+    ui->horizontalSlider_speed->setRange(-10,10);
+    ui->horizontalSlider_speed->setValue(0);
+
+
+
 
 
 
@@ -195,5 +200,11 @@ void MainWindow::on_pushButton_full_clicked()
     ui->widget->showFullScreen();
 }
 
+void MainWindow::on_horizontalSlider_speed_valueChanged(int value)
+{
+    double play_speed = 1.0+(double)value/10;
+    qMediaPlayer->setPlaybackRate(play_speed);
 
-
+    QString qstr_play_speed = QString::number(play_speed, 'f', 1);
+    ui->label_speed->setText(qstr_play_speed);
+}
